@@ -30,7 +30,7 @@ namespace producer.Controllers
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: "greetings",
+                channel.QueueDeclare(queue: "TaskQueue",
                                      durable: false,
                                      exclusive: false,
                                      autoDelete: false,
@@ -40,7 +40,7 @@ namespace producer.Controllers
                 var body = Encoding.UTF8.GetBytes(message);
 
                 channel.BasicPublish(exchange: "",
-                                     routingKey: "greetings",
+                                     routingKey: "TaskQueue",
                                      basicProperties: null,
                                      body: body);
             }
